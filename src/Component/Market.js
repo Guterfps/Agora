@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react'
+import { observer,inject } from 'mobx-react'
 import Item from './item'
+@inject("inventory")
 @observer
 class Maket extends Component{
     constructor(){
@@ -27,8 +28,9 @@ class Maket extends Component{
             <div>
                 <input value={this.state.newItem} type='text' onChange = {this.handleChange}/>
                 <button onClick = {this.addItem}>Add</button>
+                <span>{this.props.inventory.numItems}</span>
             <ul>
-              {this.props.inventory.list.map((i,ind)=><Item item={i} key={ind} buyItem={this.props.inventory.buyItem} changeprice={this.props.inventory.changeprice} />)}
+              {this.props.inventory.list.map((i,ind)=><Item item={i} key={ind}  />)}
             </ul>
             </div>
         )

@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action,computed } from 'mobx'
 import { Item } from './Item'
  export class Inventory{
     @observable list = []
@@ -22,5 +22,10 @@ import { Item } from './Item'
     @action changeprice=(name,price)=>{
         let item=this.list.find(i=>i.name===name)
         item.price=price
+    }
+    @computed get numItems(){
+        let num=0
+        this.list.forEach(i=>num+=i.quantity)
+        return num
     }
 }
